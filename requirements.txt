@@ -1,0 +1,13 @@
+keras
+matplotlib
+neuroCombat
+neuroHarmonize
+nibabel
+numpy
+pandas
+scikit-learn
+scipy
+seaborn
+sphinx
+statsmodels
+tensorflow
