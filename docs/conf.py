@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import sphinx_rtd_theme
 package_name = 'brain_age_predictor'
 package_root = os.path.abspath('..')
 sys.path.insert(0, package_root)
