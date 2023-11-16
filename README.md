@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/brainageprediction-abide/badge/?version=latest)](https://brainageprediction-abide.readthedocs.io/en/latest/?badge=latest)
+
 # BrainAgePrediction-ABIDE
 This repository, managed by Marco D'Arrigo, exhibits my exam project for the Computing Methods for Experimental Physics and Data Analysis course. 
 The project is centered around developing an algorithm capable of predicting brain age by analyzing features extracted from brain MRIs.
