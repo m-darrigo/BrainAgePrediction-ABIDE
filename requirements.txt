@@ -8,7 +8,7 @@ pandas
 scikit-learn
 scipy
 seaborn
-sphinx
+sphinx==4.2.0
 sphinx_rtd_theme
 statsmodels
 tensorflow
