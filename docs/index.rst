@@ -1,3 +1,6 @@
+BrainAgePrediction-ABIDE
+================
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
