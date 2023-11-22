@@ -1,4 +1,4 @@
-BrainAgePrediction-ABIDE
+.. BrainAgePrediction-ABIDE
 ================
 
 .. toctree::
