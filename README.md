@@ -11,8 +11,8 @@ The algorithm, crafted for this purpose, is equipped to:
 - implement regression models
 - Evaluate and compare prediction performance.
 ## Dataset
-The dataset contains 419 brain morphological features (volumes, thinckness, area, etc.) of brain parcels and global measure, derived for 915 male subjects of the [ABIDE dataset](http://fcon_1000.projects.nitrc.org/indi/abide/).
-ABIDE stands for Autism Brain Imaging Data Exchange.
+The dataset contains 419 brain morphological features (volumes, thinckness, area, etc.) of brain parcels and global measure, derived for 915 male subjects of the [ABIDE dataset](http://fcon_1000.projects.nitrc.org/indi/abide/) ABIDE stands for Autism Brain Imaging Data Exchange.
+The features are contained in a .csv file in the BrainAgePrediction/dataset folder.
 
 For each subject, the following information are specified in the fists columns:
 - subject ID
