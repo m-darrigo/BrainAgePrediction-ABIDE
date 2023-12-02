@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "neuroimage"
+version = "0.1.0"
+description = ""
+authors = ["Marco D'arrigo"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+# Must be compatible at least with python 3.8
+python ="3.9.13"
+pandas="1.4.1"
+numpy="1.23.5"
+scikit-learn="1.0.2"
+seaborn="0.13"
+tensorflow="2.15.0" 
+keras="2.15.0"
+networkx="3.0"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.27.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
