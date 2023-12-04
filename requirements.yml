@@ -1,0 +1,9 @@
+name: tf2.12
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - tensorflow
+  - seaborn
+  - scikit-learn
+  - ipykernel
