@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler, PowerTransformer
 
 
 def alldistr_img(df):
@@ -77,10 +78,68 @@ def top_corr_relations(df, y, target_variable="AGE_AT_SCAN", num_top_features=30
 
     return 0
 
+def scaled_distributions(df):
+    """
+    Visualizes scaled distributions of columns with high variance.
 
+    This function takes a DataFrame and applies two scalers (Standard Scaler and PowerTransformer)
+    to columns with high variance. Subsequently, it visualizes the scaled distributions using
+    Seaborn's displot.
 
+    Parameters:
+    - df (pd.DataFrame): The DataFrame containing the data to be analyzed.
 
+    Returns:
+    None
+    """
+    high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
+    scalers = [StandardScaler(), PowerTransformer()]
 
+    names = ["Standard Scaler", "PowerTransformer"]
+
+    for scaler, name in zip(scalers, names):
+        scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+        g = sns.displot(
+            data=scaled_df[high_variance_col].melt(),
+            x="value",
+            col="variable",
+            facet_kws={"sharey":False, "sharex":False},
+            common_bins=False,
+            col_wrap=5
+        )
+        plt.title(name)
+
+def pca_variance(df):
+    """
+    Visualizes the explained variance of Principal Components Analysis (PCA) on scaled data.
+
+    This function takes a DataFrame, applies two scalers (Standard Scaler and PowerTransformer),
+    performs PCA, and visualizes the explained variance.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame containing the data to be analyzed.
+
+    Returns:
+    None
+    """
+    high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
+    scalers = [StandardScaler(), PowerTransformer()]
+
+    names = ["Standard Scaler", "PowerTransformer"]
+
+    for scaler, name in zip(scalers, names):
+        scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+
+    pca = PCA().fit(scaled_df)
+
+    plt.vlines(20, 0, 1, ls="--", color="black", label=r"EV top 20 components")
+    plt.plot(np.concatenate([[0.0], pca.explained_variance_ratio_.cumsum()]), label="Cumsum EV")
+    plt.legend(loc="lower right")
+
+    plt.xticks(range(0 , 400, 100))
+    plt.xlim(-20, df.shape[1])
+    plt.xlabel("Components")
+    plt.ylabel("Explained variance")
 
 
 
