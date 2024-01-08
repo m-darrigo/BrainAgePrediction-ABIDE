@@ -13,7 +13,34 @@ from sklearn.preprocessing import StandardScaler, PowerTransformer
 
 def alldistr_img(df):
     """
-    function that takes a dataset and plots the distributions of all features into a single image.
+    Plot the distributions of all features in a pandas DataFrame in a single image.
+
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The input dataset containing features for which distributions will be plotted.
+
+    Raises:
+    -------
+    ValueError
+        If the input `df` is not a pandas DataFrame.
+
+    Notes:
+    ------
+    This function uses seaborn's displot to visualize the distributions of all features
+    in the input DataFrame. Each feature is represented in a separate subplot within
+    a single image. The resulting image is saved as "imgs/all_distributions.png" in the
+    current working directory.
+
+    Example:
+    --------
+    ```python
+    import pandas as pd
+    from your_module import alldistr_img
+
+    # Assuming 'df' is your dataset
+    alldistr_img(df)
+    ```
     """
 
     # dtype check
