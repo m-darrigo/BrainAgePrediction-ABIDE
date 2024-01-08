@@ -176,27 +176,3 @@ def neural_network_pipeline(
     )
 
     return df_results[no_overfit].sort_values("rank_test_score")
-
-
-def alldistr_img(df):
-    """
-    function that takes a dataset and plots the distributions of all features into a single image.
-    """
-
-    # dtype check
-    if not isinstance(df, pd.DataFrame):
-        raise ValueError("df must be a pandas DataFrame")
-
-    sns.displot(
-        data=df.melt(),
-        x="value",
-        col="variable",
-        facet_kws={"sharey": False, "sharex": False},
-        common_bins=False,
-        col_wrap=5,
-    )
-
-    plt.savefig("imgs/all_distributions.png")
-    plt.close()
-
-    return 1
