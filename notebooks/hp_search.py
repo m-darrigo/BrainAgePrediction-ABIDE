@@ -48,7 +48,66 @@ def linear_regressor_pipeline(
     **kwargs,
 ) -> pd.DataFrame:
     """
-    Pipeline for linear regressor
+    Conducts a linear regression pipeline using L1 regularization (Lasso).
+
+    Parameters:
+    -----------
+    df : np.ndarray
+        Input dataset containing features as a 2D array of numerical values.
+
+    y : np.ndarray
+        Target variable as a 1D array of numerical values.
+
+    n_components : int, optional (default=20)
+        Number of principal components to retain after dimensionality reduction.
+
+    thresh_overfit : float, optional (default=0.05)
+        Threshold for identifying overfitting, defined as the difference between
+        mean training and test scores.
+
+    scoring : str, optional (default="r2")
+        Scoring metric used for the cross-validated grid search. Default is R-squared.
+
+    nsplits : int, optional (default=5)
+        Number of splits in the cross-validation strategy.
+
+    seed : int, optional (default=None)
+        Seed for random state to ensure reproducibility.
+
+    **kwargs : Additional keyword arguments
+        Additional parameters to be passed to the `GridSearchCV` function.
+
+    Returns:
+    --------
+    pd.DataFrame
+        DataFrame containing cross-validation results for different hyperparameter
+        settings. Only models without significant overfitting are included,
+        sorted by mean test score in descending order.
+
+    Raises:
+    -------
+    ValueError
+        - If `n_components` is less than 1.
+        - If `thresh_overfit` is negative.
+
+    Notes:
+    ------
+    This function implements a linear regression pipeline with L1 regularization (Lasso).
+    It scales the input data, performs principal component analysis (PCA) for dimensionality
+    reduction, and uses Lasso regression as the final model. The pipeline is optimized
+    using grid search with cross-validation to find the best hyperparameters.
+
+    The results DataFrame includes information about the hyperparameter settings,
+    training and test scores, and identifies models without significant overfitting.
+
+    Example:
+    --------
+    ```python
+    df = ...
+    y = ...
+    results = linear_regressor_pipeline(df, y, n_components=15, nsplits=10, seed=42)
+    print(results)
+    ```
     """
     # set a random state so the results are reproducible
     rng = np.random.RandomState(seed)
@@ -104,6 +163,45 @@ def n_layers_feed_forward(
     dropouts: Iterable,
     meta: dict,  # Output KerasWrapper
 ):
+    """
+    Create a feed-forward neural network with a specified number of layers, hidden units,
+    and dropout rates.
+
+    Parameters:
+    -----------
+    nlayers : int
+        Number of layers in the neural network.
+
+    hiddens : Iterable
+        Iterable containing the number of hidden units for each layer.
+
+    dropouts : Iterable
+        Iterable containing the dropout rates for each layer.
+
+    meta : dict
+        Metadata dictionary containing information about the input shape for the neural network.
+
+    Returns:
+    --------
+    Sequential
+        Keras Sequential model representing the specified feed-forward neural network.
+
+    Raises:
+    -------
+    ValueError
+        If `nlayers` is less than 1.
+
+    Example:
+    --------
+    ```python
+    nlayers = 3
+    hiddens = [64, 128, 32]
+    dropouts = [0.2, 0.4, 0.1]
+    meta = {"X_shape_": (100,)}
+    model = n_layers_feed_forward(nlayers, hiddens, dropouts, meta)
+    ```
+
+    """
     # set seed to have reproducible results
     set_random_seed(SEED)
     if nlayers < 1:
@@ -135,7 +233,60 @@ def neural_network_pipeline(
     **kwargs,
 ):
     """
-    ...
+    Conducts a pipeline for neural network regression using a specified Keras model.
+
+    Parameters:
+    -----------
+    mlp : KerasRegressor
+        KerasRegressor model to be used in the pipeline.
+
+    df : np.ndarray
+        Input features as a 2D array of numerical values.
+
+    y : np.ndarray
+        Target variable as a 1D array of numerical values.
+
+    n_components : int, optional (default=20)
+        Number of principal components to retain after dimensionality reduction.
+
+    niter : int, optional (default=100)
+        Number of iterations for randomized search during hyperparameter tuning.
+
+    thresh_overfit : float, optional (default=0.05)
+        Threshold for identifying overfitting, defined as the difference between
+        mean training and test scores.
+
+    scoring : str, optional (default="r2")
+        Scoring metric used for the cross-validated randomized search. Default is R-squared.
+
+    nsplits : int, optional (default=5)
+        Number of splits in the cross-validation strategy.
+
+    seed : int, optional (default=None)
+        Seed for random state to ensure reproducibility.
+
+    **kwargs : Additional keyword arguments
+        Additional parameters to be passed to the `RandomizedSearchCV` function.
+
+    Returns:
+    --------
+    pd.DataFrame
+        DataFrame containing cross-validation results for different hyperparameter
+        settings. Only models without significant overfitting are included,
+        sorted by mean test score in descending order.
+
+    Example:
+    --------
+    ```python
+    from sklearn.neural_network import MLPRegressor
+    import hp_search
+
+    # Assuming 'df' and 'y' are your dataset and target variable
+    mlp_model = MLPRegressor()
+    results = neural_network_pipeline(mlp_model, df, y, n_components=15, nsplits=10, seed=42)
+    print(results)
+    ```
+
     """
 
     rng = np.random.RandomState(seed)
