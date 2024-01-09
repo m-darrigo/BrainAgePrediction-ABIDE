@@ -5,7 +5,7 @@ neuroHarmonize
 nibabel
 numpy
 pandas
-scikit-learn
+sklearn
 scipy
 seaborn
 sphinx
