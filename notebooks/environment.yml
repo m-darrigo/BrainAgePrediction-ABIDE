@@ -1,8 +1,0 @@
-name: tf2.12
-channels:
-  - defaults
-dependencies:
-  - python=3.9
-  - tensorflow=2.12.0
-  - seaborn=0.12.2
-  - scikit-learn=1.2.2
