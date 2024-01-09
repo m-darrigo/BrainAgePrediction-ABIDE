@@ -5,7 +5,6 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import networkx as nx
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler, PowerTransformer
@@ -119,28 +118,64 @@ def scaled_distributions(df):
     Seaborn's displot.
 
     Parameters:
-    - df (pd.DataFrame): The DataFrame containing the data to be analyzed.
+    -----------
+    df : pd.DataFrame
+        The DataFrame containing the data to be analyzed.
 
     Returns:
+    --------
     None
-    """
 
+    Raises:
+    -------
+    ValueError
+        If `df` is not a pandas DataFrame.
+
+    Notes:
+    ------
+    This function identifies columns with high variance based on kurtosis, applies Standard Scaler
+    and PowerTransformer to the selected columns, and visualizes the scaled distributions using
+    Seaborn's displot.
+
+    The top 20 columns with the highest kurtosis values are chosen for visualization. Two scalers,
+    Standard Scaler and PowerTransformer, are applied to create two sets of scaled distributions.
+    Each set is displayed in a separate subplot with a title indicating the scaler used.
+
+    Example:
+    --------
+    ```python
+    import pandas as pd
+    from library import scaled_distributions
+
+    # Assuming 'df' is your DataFrame
+    scaled_distributions(df)
+    ```
+
+    """
     # dtype check
     if not isinstance(df, pd.DataFrame):
         raise ValueError("df must be a pandas DataFrame")
 
+    # Identify columns with high variance based on kurtosis
     high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
+
+    # Define scalers
     scalers = [StandardScaler(), PowerTransformer()]
 
+    # Define scaler names for plot titles
     names = ["Standard Scaler", "PowerTransformer"]
 
+    # Iterate over scalers
     for scaler, name in zip(scalers, names):
+        # Apply scaler and create a DataFrame with scaled values
         scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+
+        # Visualize scaled distributions using Seaborn's displot
         g = sns.displot(
             data=scaled_df[high_variance_col].melt(),
             x="value",
             col="variable",
-            facet_kws={"sharey":False, "sharex":False},
+            facet_kws={"sharey": False, "sharex": False},
             common_bins=False,
             col_wrap=5
         )
@@ -156,36 +191,74 @@ def pca_variance(df):
     performs PCA, and visualizes the explained variance.
 
     Parameters:
-    - df (pd.DataFrame): The DataFrame containing the data to be analyzed.
+    -----------
+    df : pd.DataFrame
+        The DataFrame containing the data to be analyzed.
 
     Returns:
+    --------
     None
-    """
 
+    Raises:
+    -------
+    ValueError
+        If `df` is not a pandas DataFrame.
+
+    Notes:
+    ------
+    This function identifies columns with high variance based on kurtosis, applies Standard Scaler
+    and PowerTransformer to the selected columns, performs PCA, and visualizes the explained variance.
+
+    The top 20 columns with the highest kurtosis values are chosen for PCA analysis. The cumulative
+    explained variance is plotted against the number of principal components, and a vertical dashed
+    line indicates the top 20 components. This helps in understanding how much variance is retained
+    with a certain number of principal components.
+
+    Example:
+    --------
+    ```python
+    import pandas as pd
+    from library import pca_variance
+
+    # Assuming 'df' is your DataFrame
+    pca_variance(df)
+    ```
+
+    """
     # dtype check
     if not isinstance(df, pd.DataFrame):
         raise ValueError("df must be a pandas DataFrame")
 
+    # Identify columns with high variance based on kurtosis
     high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
+
+    # Define scalers
     scalers = [StandardScaler(), PowerTransformer()]
 
+    # Define scaler names for plot titles
     names = ["Standard Scaler", "PowerTransformer"]
 
+    # Iterate over scalers
     for scaler, name in zip(scalers, names):
+        # Apply scaler and create a DataFrame with scaled values
         scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 
+    # Perform PCA on the scaled data
     pca = PCA().fit(scaled_df)
 
+    # Plot the explained variance and cumulative explained variance
     plt.vlines(20, 0, 1, ls="--", color="black", label=r"EV top 20 components")
     plt.plot(np.concatenate([[0.0], pca.explained_variance_ratio_.cumsum()]), label="Cumsum EV")
     plt.legend(loc="lower right")
 
-    plt.xticks(range(0 , 400, 100))
+    # Customize plot
+    plt.xticks(range(0, 400, 100))
     plt.xlim(-20, df.shape[1])
     plt.xlabel("Components")
     plt.ylabel("Explained variance")
 
     pass
+
 
 
 
