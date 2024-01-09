@@ -124,6 +124,11 @@ def scaled_distributions(df):
     Returns:
     None
     """
+
+    # dtype check
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("df must be a pandas DataFrame")
+
     high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
     scalers = [StandardScaler(), PowerTransformer()]
 
@@ -156,6 +161,11 @@ def pca_variance(df):
     Returns:
     None
     """
+
+    # dtype check
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("df must be a pandas DataFrame")
+
     high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
     scalers = [StandardScaler(), PowerTransformer()]
 
