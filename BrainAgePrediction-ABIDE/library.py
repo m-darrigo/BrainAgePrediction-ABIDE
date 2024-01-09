@@ -72,18 +72,25 @@ def corr_distr(df_corr):
     pass
 
 def top_corr_relations(df, y, target_variable="AGE_AT_SCAN", num_top_features=30):
-    '''
-    Identifies the top 30 features in a DataFrame based on their absolute correlation with a target variable.
-    
-    Creates a new DataFrame by combining the selected features and the target variable in a long format.
-    
-    Generates scatter plots with regression lines for each selected feature against a specified variable.
-    
-    The resulting visualizations offer insights into the relationship between the top correlated features and
-    the target variable across different subplots.
-    
-    The scatter plots illustrate how the values of these features vary concerning the specified variable.
-    '''
+    """
+    Visualizes top correlated features with a target variable using scatter plots.
+
+    Parameters:
+    - df (pd.DataFrame): Input DataFrame containing features.
+    - y (pd.Series): Target variable to be correlated with features.
+    - target_variable (str, optional): Column name of the target variable. Default is "AGE_AT_SCAN".
+    - num_top_features (int, optional): Number of top features to consider. Default is 30.
+
+    Returns:
+    None
+
+    Calculates absolute correlation between each feature in df and the target variable (y).
+    Selects the top 'num_top_features' features based on correlation and generates scatter plots for
+    each feature against the target variable. Scatter plots are arranged in a grid with 3 columns.
+
+    Example:
+    top_corr_relations(df, y)
+    """
     top_corr_features = (
         np.abs(df.corrwith(y))
         .sort_values(ascending=False)
@@ -171,14 +178,14 @@ def scaled_distributions(df):
         scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 
         # Visualize scaled distributions using Seaborn's displot
-        g = sns.displot(
-            data=scaled_df[high_variance_col].melt(),
-            x="value",
-            col="variable",
-            facet_kws={"sharey": False, "sharex": False},
-            common_bins=False,
-            col_wrap=5
-        )
+        sns.displot(
+        data=scaled_df[high_variance_col].melt(),
+        x="value",
+        col="variable",
+        facet_kws={"sharey": False, "sharex": False},
+        common_bins=False,
+        col_wrap=5)
+
         plt.title(name)
 
     pass
@@ -206,13 +213,13 @@ def pca_variance(df):
 
     Notes:
     ------
-    This function identifies columns with high variance based on kurtosis, applies Standard Scaler
-    and PowerTransformer to the selected columns, performs PCA, and visualizes the explained variance.
+    This function applies Standard Scaler and PowerTransformer to the DataFrame,
+    performs PCA on the scaled data, and visualizes the explained variance.
 
-    The top 20 columns with the highest kurtosis values are chosen for PCA analysis. The cumulative
-    explained variance is plotted against the number of principal components, and a vertical dashed
-    line indicates the top 20 components. This helps in understanding how much variance is retained
-    with a certain number of principal components.
+    The top 20 columns with the highest kurtosis values are chosen for PCA analysis.
+    The cumulative explained variance is plotted against the number of principal components.
+    A vertical dashed line indicates the top 20 components, providing insight into the
+    retained variance with a specific number of principal components.
 
     Example:
     --------
@@ -229,17 +236,11 @@ def pca_variance(df):
     if not isinstance(df, pd.DataFrame):
         raise ValueError("df must be a pandas DataFrame")
 
-    # Identify columns with high variance based on kurtosis
-    high_variance_col = df.kurtosis().sort_values(ascending=False).head(20).index
-
     # Define scalers
     scalers = [StandardScaler(), PowerTransformer()]
 
-    # Define scaler names for plot titles
-    names = ["Standard Scaler", "PowerTransformer"]
-
     # Iterate over scalers
-    for scaler, name in zip(scalers, names):
+    for scaler in scalers:
         # Apply scaler and create a DataFrame with scaled values
         scaled_df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 
@@ -258,11 +259,3 @@ def pca_variance(df):
     plt.ylabel("Explained variance")
 
     pass
-
-
-
-
-
-
-
-
