@@ -1,10 +1,71 @@
+"""
+Regression Pipelines Module
+
+This module provides functions for building and evaluating regression pipelines, specifically
+focused on linear regression with L1 regularization (Lasso) and neural network regression
+using Keras models.
+
+Functions:
+1. `linear_regressor_pipeline`:
+   Conducts a linear regression pipeline with L1 regularization (Lasso) by scaling data,
+   performing PCA for dimensionality reduction, and using Lasso regression.
+   It optimizes the pipeline using grid search with cross-validation.
+
+2. `n_layers_feed_forward`:
+   Creates a feed-forward neural network with a specified number of layers, hidden units,
+   and dropout rates. It returns a Keras Sequential model.
+
+3. `neural_network_pipeline`:
+   Conducts a pipeline for neural network regression using a specified Keras model.
+   The pipeline includes scaling data, performing PCA for dimensionality reduction,
+   and using the Keras model. It optimizes hyperparameters using randomized search
+   with cross-validation.
+
+Modules:
+- `itertools.product`: Generates Cartesian product of input iterables.
+- `typing`: Type hints for Python.
+
+Dependencies:
+- `numpy`: Numerical operations and random number generation.
+- `pandas`: Data manipulation and analysis.
+- `scikit-learn`: Machine learning library for preprocessing, modeling, and evaluation.
+- `keras`: High-level neural networks API.
+- `scikeras.wrappers.KerasRegressor`: Wrapper for Keras models compatible with scikit-learn.
+- `numpy.typing`: Type hints for NumPy arrays.
+
+Global Variables:
+- `SEED`: Seed for the random number generator.
+- `RNG`: Random number generator with seed `SEED`.
+- `VALID_ENTRIES`: List of valid entries for the number of hidden units.
+- `HIDDEN_LAYERS`: List of hidden layer configurations generated using `itertools.product`.
+- `DROPOUTS`: List of dropout rates generated using `RNG.choice`.
+- `PARAMS`: Dictionary containing hyperparameter settings for grid search.
+
+Usage Example:
+```python
+import regression_pipelines as rp
+import numpy as np
+
+# Assuming 'df' and 'y' are your dataset and target variable
+results_lasso = hp.linear_regressor_pipeline(df, y, verbose=1, seed=hp.SEED)
+print(results_lasso)
+
+# Create a KerasRegressor model for neural network regression
+mlp = hp.n_layers_feed_forward(
+    dropouts=[0.1, 0.0, 0.0, 0.0,],
+    hiddens=(4, 4, 32, 32),
+    nlayers=3,
+    meta={"X_shape_":(0, 20)}
+)
+results_mlp = hp.neural_network_pipeline(mlp, df, y, niter=100, verbose=3, seed=hp.SEED)
+print(results_mlp)
+"""
+
 from itertools import product
 from typing import Iterable, Optional
 
 import numpy as np
-import seaborn as sns
 import pandas as pd
-import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import PowerTransformer
 from sklearn.decomposition import PCA
@@ -14,9 +75,9 @@ from sklearn.model_selection import KFold
 from sklearn.pipeline import Pipeline
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
+from keras.utils import set_random_seed
 from scikeras.wrappers import KerasRegressor
 from numpy import typing as npt
-from keras.utils import set_random_seed
 
 # Random Number Generator
 SEED = 20
