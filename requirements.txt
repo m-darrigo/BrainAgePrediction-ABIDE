@@ -2,8 +2,7 @@ keras
 matplotlib
 numpy
 pandas
-sklearn
-scipy
+scikit-learn
 seaborn
 sphinx
 sphinx_rtd_theme
