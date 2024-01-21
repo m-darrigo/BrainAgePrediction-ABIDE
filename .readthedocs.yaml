@@ -1,3 +1,8 @@
+
+
+User
+per readthedocs.yaml
+
 # .readthedocs.yaml
 
 version: 2
@@ -12,3 +17,29 @@ python:
   version: 3.8
   install:
     - requirements: requirements.txt
+
+Error
+At least one item should be provided in "tools" or "commands".
+ChatGPT
+It looks like you're encountering an error in your .readthedocs.yaml file. The error message indicates that you need to provide at least one item in the "tools" or "commands" section. These sections are used to specify additional tools or commands to be executed during the documentation build process.
+
+Here's an example of how you can update your .readthedocs.yaml file to include the "tools" section:
+
+yaml
+Copy code
+# .readthedocs.yaml
+
+version: 2
+
+sphinx:
+  configuration: docs/conf.py
+
+build:
+  os: ubuntu-22.04
+
+python:
+  version: 3.8
+  install:
+    - requirements: requirements.txt
+
+tools:
