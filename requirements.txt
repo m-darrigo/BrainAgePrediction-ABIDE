@@ -1,8 +1,5 @@
 keras
 matplotlib
-neuroCombat
-neuroHarmonize
-nibabel
 numpy
 pandas
 sklearn
@@ -10,4 +7,3 @@ scipy
 seaborn
 sphinx
 sphinx_rtd_theme
-statsmodels

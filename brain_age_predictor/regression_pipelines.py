@@ -6,9 +6,6 @@ focused on linear regression with L1 regularization (:py:obj:`Lasso <sklearn.lin
 and neural network regression using Keras models.
 """
 
-from itertools import product
-from typing import Iterable, Optional
-
 import numpy as np
 import pandas as pd
 
@@ -21,7 +18,6 @@ from sklearn.pipeline import Pipeline
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from keras.utils import set_random_seed
-from scikeras.wrappers import KerasRegressor
 from numpy import typing as npt
 
 # Random Number Generator
