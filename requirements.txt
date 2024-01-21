@@ -6,3 +6,4 @@ scikit-learn
 seaborn
 sphinx
 sphinx_rtd_theme
+cmake
