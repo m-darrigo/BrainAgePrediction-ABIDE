@@ -9,6 +9,9 @@ build:
   os: ubuntu-22.04
   python:
     version: 3.8
+  tools:
+    - make
+    - cmake
 
 python:
   version: 3.8
