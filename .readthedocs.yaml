@@ -1,6 +1,4 @@
 version: 2
-build:
-  image: latest
-  dependencies:
-    pre:
-      - pip install cmake
+
+sphinx:
+  configuration: docs/source/conf.py
