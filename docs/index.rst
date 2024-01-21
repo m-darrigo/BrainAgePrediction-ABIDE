@@ -3,13 +3,14 @@
    contain the root `toctree` directive.
 
 Welcome to BrainAgePrediction-ABIDE's documentation!
-===============================================
+====================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   install
+   preprocessing
+   regression
 
 
 
