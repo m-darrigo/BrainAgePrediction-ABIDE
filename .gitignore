@@ -1,2 +1,6 @@
 __pycache__
 .ipynb_checkpoints
+
+brain_age_predictor/__pycache__
+brain_age_predictor/.ipynb_checkpoints
+docs/_build
