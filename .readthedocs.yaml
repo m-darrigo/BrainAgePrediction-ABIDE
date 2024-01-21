@@ -9,9 +9,3 @@ python:
   version: 3.8
   install:
     - requirements: docs/requirements.txt
-
-os:
-  - windows
-    build: true
-  - linux
-    build: true
