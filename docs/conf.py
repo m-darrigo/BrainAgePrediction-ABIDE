@@ -50,7 +50,7 @@ extensions = [
 ]
 
 # Mock the import of TensorFlow during documentation build
-autodoc_mock_imports = ["tensorflow", "absl", "wrapt", "keras", "scikeras"]
+autodoc_mock_imports = ["tensorflow", "absl", "wrapt", "scikeras", "keras"]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
