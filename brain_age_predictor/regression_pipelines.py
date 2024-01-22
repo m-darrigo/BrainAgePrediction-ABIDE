@@ -18,7 +18,7 @@ from sklearn.pipeline import Pipeline
 from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from keras.utils import set_random_seed
-from scikeras import KerasRegressor
+from scikeras.wrappers import KerasRegressor
 from numpy import typing as npt
 from itertools import product
 from typing import Optional, Iterable
