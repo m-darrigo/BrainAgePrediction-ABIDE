@@ -19,6 +19,7 @@ from keras.layers import Dense, Dropout
 from keras.models import Sequential
 from keras.utils import set_random_seed
 from numpy import typing as npt
+from itertools import product
 
 # Random Number Generator
 SEED = 20
