@@ -49,6 +49,8 @@ extensions = [
     'sphinx_rtd_theme'
 ]
 
+# Mock the import of TensorFlow during documentation build
+autodoc_mock_imports = ["tensorflow"]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and

@@ -7,4 +7,3 @@ seaborn
 sphinx
 sphinx_rtd_theme
 cmake
-tensorflow==2.5.0
