@@ -8,4 +8,4 @@ sphinx
 sphinx_rtd_theme
 cmake
 tensorflow
-itertools
+tensorflow==2.5.0
