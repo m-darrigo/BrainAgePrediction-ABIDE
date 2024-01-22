@@ -5,11 +5,7 @@ This repository, managed by Marco D'Arrigo, exhibits my exam project for the Com
 The project is centered around developing an algorithm capable of predicting brain age by analyzing features extracted from brain MRIs.
 
 The dataset used is derived from the well-known ABIDE dataset, including subjects affected by Autism Spectrum Disorder (ASD) and healthy control subjects (CTR). 
-The algorithm, crafted for this purpose, is equipped to:
-
-- Data Understanding & Preparation.
-- implement regression models
-- Evaluate and compare prediction performance.
+The algorithms, crafted for this purpose, are equipped to perform Data Understanding & Preparation and implement regression models
 ## Dataset
 The dataset contains 419 brain morphological features (volumes, thinckness, area, etc.) of brain parcels and global measure, derived for 915 male subjects of the [ABIDE dataset](http://fcon_1000.projects.nitrc.org/indi/abide/) ABIDE stands for Autism Brain Imaging Data Exchange.
 
