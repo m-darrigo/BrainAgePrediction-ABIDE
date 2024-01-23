@@ -18,9 +18,9 @@ This project aims to design and compare regression models for predicting the age
 - **Data Directory:** Contains the dataset.
   
 - **Main Project Directory (brain\_age\_predictor):**
-  - **libs:** Includes two libraries, one with functions for preprocessing and another with pipelines for a linear regressor and an MLP.
-  - **notebooks:** Contains two Jupyter notebooks, one for preprocessing and the other for regression, using the library functions.
-  - **results:** Includes two .csv files with the best results of the regressors.
+  - Two libraries, one with functions for preprocessing and another with pipelines for a linear regressor and an MLP.
+  - Two Jupyter notebooks, one for preprocessing and the other for regression, using the library functions.
+  - Two .csv files with the best results of the regressors.
   - **imgs:** A directory for saving images.
   
 - **Tests Directory (tests):** Includes simple tests for some functions.
@@ -30,7 +30,7 @@ This project aims to design and compare regression models for predicting the age
 - **Documentation (docs):**
   - Produced using Sphinx.
   - Accessible on Read the Docs.
-  - Can be generated locally.
+  - Can be generated locally with make command.
   - Utilizes `intersphinx_mapping` for navigation.
 
 ## Scripts and Notebooks
