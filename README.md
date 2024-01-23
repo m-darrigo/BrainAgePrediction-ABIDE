@@ -56,5 +56,3 @@ This project aims to design and compare regression models for predicting the age
 - Linear Regressor: Achieved an $R^2$ score of 0.66 with a standard deviation of 0.04.
 
 - MLP: Achieved an $R^2$ score of 0.71 with a standard deviation of 0.02.
-
-The project's organizational structure facilitates maintenance, reproducibility, and iterative analysis of results.
