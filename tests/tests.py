@@ -1,9 +1,13 @@
 """ Tests"""
 import unittest
 import numpy as np
+import os
+import sys
+
+package_name = "./brain_age_predictor"
+sys.path.insert(0, package_name)
 
 import preprocessing_lib as lib
-
 
 class TestPreprocessing(unittest.TestCase):
     def __init__(self):

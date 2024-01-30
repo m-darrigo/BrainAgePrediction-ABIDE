@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./brain_age_predictor"
+    ]
+}
